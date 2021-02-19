@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Jujutsu Kaisen",
+        "description": "An anime about curses, and by far the best one this season",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "name": "Re Zero",
+        "description": "An Isekai show where the protagonist Subaru revives",
+        "status": "active"
+    }, 
+    {
+        "id": 3,
+        "name": "Bleach",
+        "description": "A shonen anime about Shinigamis",
+        "status": "finished"
+    },
+    {
+        "id": 4,
+        "name": "One Piece",
+        "description": "A shonen anime about Pirates",
+        "status": "active"
+    },
+    {
+        "id": 5,
+        "name": "Magi",
+        "description": "A shonen anime about magicians",
+        "status": "finished"
+    },
+    {
+        "id": 6,
+        "name": "Promised Neverland",
+        "description": "A shonen anime about mysteries",
+        "status": "active"
+    },
+    {
+        "id": 7,
+        "name": "Dr. Stone",
+        "description": "Highschooler Senku is a scientific genius, but one day, a mysterious light eradicates civilaziation. Senku is the first human to awake after 2000 years.",
+        "status": "active"
+    },
+    {
+        "id": 8,
+        "name": "Naruto",
+        "description": "A Shonen anime staged in a Ninja world. Naruto is a ninja growing up in Konoha.",
+        "status": "finished"
+    },
+    {
+        "id": 9,
+        "name": "Boruto",
+        "description": "A sequel to the popular Naruto franchise.",
+        "status": "active"
+    },
+    {
+        "id": 10,
+        "name": "Kimetsu",
+        "description": "A Shonen anime where demons `Oni` roam around the world, and protagonist Tanjiro gets his whole family, except his younger sister, killed by a demon. Although his sister Nezuko is alive, she turns into a demon as well.",
+        "status": "finished"
+    }
+]
