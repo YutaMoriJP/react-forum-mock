@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/YutaMoriJP/react-material-ui/static/js/main.da7ea669.chunk.js",
+    "main.js.map": "/YutaMoriJP/react-material-ui/static/js/main.da7ea669.chunk.js.map",
+    "runtime-main.js": "/YutaMoriJP/react-material-ui/static/js/runtime-main.d40f17e6.js",
+    "runtime-main.js.map": "/YutaMoriJP/react-material-ui/static/js/runtime-main.d40f17e6.js.map",
+    "static/js/2.4cb4cca5.chunk.js": "/YutaMoriJP/react-material-ui/static/js/2.4cb4cca5.chunk.js",
+    "static/js/2.4cb4cca5.chunk.js.map": "/YutaMoriJP/react-material-ui/static/js/2.4cb4cca5.chunk.js.map",
+    "index.html": "/YutaMoriJP/react-material-ui/index.html",
+    "precache-manifest.31567ed5c597a994cfcf36d95e18521d.js": "/YutaMoriJP/react-material-ui/precache-manifest.31567ed5c597a994cfcf36d95e18521d.js",
+    "service-worker.js": "/YutaMoriJP/react-material-ui/service-worker.js",
+    "static/js/2.4cb4cca5.chunk.js.LICENSE.txt": "/YutaMoriJP/react-material-ui/static/js/2.4cb4cca5.chunk.js.LICENSE.txt",
+    "static/media/bayernlogo.png": "/YutaMoriJP/react-material-ui/static/media/bayernlogo.f9ba3050.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d40f17e6.js",
+    "static/js/2.4cb4cca5.chunk.js",
+    "static/js/main.da7ea669.chunk.js"
+  ]
+}
