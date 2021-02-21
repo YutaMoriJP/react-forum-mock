@@ -10,6 +10,8 @@ import Avatar from "@material-ui/core/Avatar";
 import CreateUser from "./CreateUser";
 import BackspaceIcon from "@material-ui/icons/Backspace";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
 const AvatarStyled = styled(Avatar)`
   background-color: seagreen;
 `;
@@ -119,13 +121,15 @@ const Profile = () => {
         <Grid container spacing={5} justify="center">
           <Grid item sm={12} md={12} lg={10}>
             <StyledPaer>
-              <Header>Profile Page</Header>
+              <Typography color="primary" variant="h3">
+                Profile Page
+              </Typography>
               <Grid container spacing={1} justify="center">
                 {!checked.checkedA && !checked.checkedB ? (
                   <Agreement>
-                    <Header small={true}>
+                    <Typography variant="h5" color="secondary">
                       Are you sure your username is {username}
-                    </Header>
+                    </Typography>
                     <FormControlLabel
                       label="I AGREE"
                       control={

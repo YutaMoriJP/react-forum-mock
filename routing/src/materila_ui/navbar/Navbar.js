@@ -14,31 +14,46 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import Typography from "@material-ui/core/Typography";
+import { useTheme } from "../ContextProvider/ThemeProvider";
+import Switch from "@material-ui/core/Switch";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+import Checkbox from "@material-ui/core/Checkbox";
+
+const Moon = styled(Brightness2Icon)`
+  width: 50px;
+  height: 30px;
+  color: yellow;
+`;
+
+const Sun = styled(Brightness7Icon)`
+  width: 50px;
+  height: 30px;
+  color: orange;
+`;
+
+const CheckboxStyled = styled(Checkbox)`
+  margin-left: auto;
+`;
 
 const DrawerUI = ({ open, onClose }) => {
+  const isMobile = useMediaQuery("(max-width:500px)");
   return (
-    <Drawer anchor="left" open={open} onClose={onClose}>
+    <Drawer anchor={isMobile ? "top" : "left"} open={open} onClose={onClose}>
       <List style={{ maxWidth: 300 }}>
         <LinkStyled to="/" onClick={onClose}>
-          <Button fullWidth={true} color="primary" startIcon={<Home />}>
+          <Button fullWidth={true} startIcon={<Home />}>
             <ListItemStyled>Home</ListItemStyled>
           </Button>
         </LinkStyled>
         <LinkStyled to="/about" onClick={onClose}>
-          <Button
-            fullWidth={true}
-            color="primary"
-            startIcon={<MoreHorizIcon />}
-          >
+          <Button fullWidth={true} startIcon={<MoreHorizIcon />}>
             <ListItemStyled>About</ListItemStyled>
           </Button>
         </LinkStyled>
         <LinkStyled to="/profile" onClick={onClose}>
-          <Button
-            fullWidth={true}
-            color="primary"
-            startIcon={<AccountBoxIcon />}
-          >
+          <Button fullWidth={true} startIcon={<AccountBoxIcon />}>
             <ListItemStyled>Profile</ListItemStyled>
           </Button>
         </LinkStyled>
@@ -55,42 +70,61 @@ const ListItemStyled = styled(ListItem)`
   font-size: 1rem;
 `;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   margin: {
     margin: 0,
-  },
-  color: {
-    color: "white",
   },
   padding: {
     padding: 20,
   },
-}));
+  background: {
+    backgroundColor: "seagreen",
+    color: "white",
+  },
+});
 
-const Menu = styled(MenuIcon)`
-  color: white;
-  width: 50px;
-  height: 40px;
+const Menu = styled(MenuIcon)``;
+
+const ToolbarStyled = styled(Toolbar)`
+  background-color: ${props => (props.isDark ? "#364fc7" : "#748ffc")};
+  color: ${props => (props.isDark ? "white" : "black")};
 `;
-
 const Navbar = () => {
-  const classes = useStyles();
+  const { isDark, setIsDark } = useTheme();
+  const handleChange = () => setIsDark(prevOn => !prevOn);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const notMobile = useMediaQuery("(min-width: 800px)");
+  console.log(isDark);
   return (
     <>
-      <AppBar position="sticky" className={classes.margin} elevation={3}>
-        <Toolbar>
-          <IconButton onClick={handleOpen}>
-            <Menu />
+      <AppBar elevation={10} position="sticky" color="secondary">
+        <ToolbarStyled variant="dense" isDark={isDark}>
+          <IconButton>
+            <Menu onClick={handleOpen} isDark={isDark} />
           </IconButton>
-        </Toolbar>
+          <Typography variant="h5">Home {JSON.stringify(isDark)}</Typography>
+          <CheckboxStyled
+            color="primary"
+            checkedIcon={<Sun />}
+            icon={<Moon />}
+            value={isDark}
+            onChange={handleChange}
+          />
+        </ToolbarStyled>
       </AppBar>
       <DrawerUI open={open} onClose={handleClose} />
     </>
   );
 };
 
+/*
+ <AppBar position="sticky" className={classes.margin} elevation={3}>
+        <Toolbar>
+          <IconButton onClick={handleOpen}>
+            <Menu />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      */
 export default Navbar;

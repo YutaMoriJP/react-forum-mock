@@ -4,6 +4,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import UserContext from "./ContextProvider/UserContext";
 import Material from "./materila_ui/Material";
+import ThemeContextProvider from "./materila_ui/ContextProvider/ThemeProvider";
 
 const ContextApp = () => {
   return (
@@ -23,9 +24,15 @@ ReactDOM.render(
 );
 */
 
+const MaterialUI = () => (
+  <ThemeContextProvider>
+    <Material />
+  </ThemeContextProvider>
+);
+
 ReactDOM.render(
   <Router>
-    <Material />
+    <MaterialUI />
   </Router>,
   document.getElementById("root")
 );

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import StyledButton from "./button/Button";
+import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, {
+  createGlobalStyle,
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
 import MenuUI from "./menu/Menu";
 import MainGrid from "./container/MainGrid";
 import DialogContainer from "./dialog/Dialog";
@@ -20,10 +24,10 @@ import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Container from "@material-ui/core/Container";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import green from "@material-ui/core/colors/green";
 import Profile from "./profile/Profile";
-
+import { useTheme } from "./ContextProvider/ThemeProvider";
 import { makeStyles } from "@material-ui/core/styles";
+import indigo from "@material-ui/core/colors/indigo";
 
 const useStyles = makeStyles({
   root: {
@@ -36,10 +40,9 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({ palette: { secondary: { main: green[900] } } });
-
 const Global = createGlobalStyle`body {
-    background-color:#dee2e6;
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.color};
     font-family: sans-serif;
     text-align:center;
     margin: 0;
@@ -50,10 +53,19 @@ const Global = createGlobalStyle`body {
 const Home = () => {
   const [open, setOpen] = useState(true);
   const classes = useStyles();
+  const { setIsDark } = useTheme();
   return (
-    <Container fixed>
+    <Container>
+      <Button
+        color="secondary"
+        variant="contained"
+        onClick={() => setIsDark(prevIsDark => !prevIsDark)}
+      >
+        Change Theme
+      </Button>
       <MyDialog />
-      <Grid container spacing={2} justify="center">
+      <Grid container spacing={1} justify="center">
+        <CardUI />
         <CardUI />
         <CardUI />
         <CardUI />
@@ -93,33 +105,58 @@ const Home = () => {
   );
 };
 
-const Material = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Global />
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
+const styledTheme = {
+  dark: {
+    background: "#212529",
+    color: "#f8f9fa",
+  },
+  light: {
+    background: "#e9ecef",
+    color: "#212529",
+  },
+};
 
-        <Route>
-          <Grid container spacing={10}>
-            <Grid item xs={12}>
-              <Paper>
-                <h1>404 Page: Nothing was found</h1>
-              </Paper>
+const Material = () => {
+  const { isDark } = useTheme();
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: isDark ? "dark" : "light",
+          primary: {
+            main: isDark ? "#a5d8ff" : "#1864ab",
+          },
+        },
+      }),
+    [isDark]
+  );
+  return (
+    <StyledThemeProvider theme={isDark ? styledTheme.dark : styledTheme.light}>
+      <ThemeProvider theme={theme}>
+        <Global />
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route>
+            <Grid container spacing={10}>
+              <Grid item xs={12}>
+                <Paper>
+                  <h1>404 Page: Nothing was found</h1>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </Route>
-      </Switch>
-    </ThemeProvider>
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </StyledThemeProvider>
   );
 };
 

@@ -6,21 +6,16 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const CardStyled = styled(Card)``;
 const CardUI = () => {
-  const matches = useMediaQuery("(min-width: 700px)");
-  const mobile = useMediaQuery("(max-width: 500px)");
-  console.log(matches);
   return (
-    <Grid item xs={mobile ? 10 : matches ? 4 : 6}>
-      <CardStyled>
+    <Grid item xs={8} sm={5} md={4} lg={3}>
+      <CardStyled elevation={20}>
         <CardActionArea>
           <CardMedia
-            image="https://gogocdn.net/cover/tensei-shitara-slime-datta-ken-2nd-season.png"
+            image={require("../img/bayernlogo.png")}
             style={{ height: 140 }}
           />
         </CardActionArea>
