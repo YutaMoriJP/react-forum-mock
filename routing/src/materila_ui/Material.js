@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import MyDialog from "./dialog/DialogTest";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
 import About from "./components/About";
 import BottomNav from "./navbar/Bottom";
@@ -38,6 +38,11 @@ const useStyles = makeStyles({
     height: 48,
     padding: "0 30px",
   },
+  paper: {
+    maxWidth: 320,
+    width: 300,
+    padding: 10,
+  },
 });
 
 const Global = createGlobalStyle`body {
@@ -50,19 +55,20 @@ const Global = createGlobalStyle`body {
     width:100vw;
 }`;
 
+const ModalStyled = styled(DialogContainer)`
+  display: block;
+  margin: auto;
+  button {
+    width: 100%;
+  }
+`;
+
 const Home = () => {
   const [open, setOpen] = useState(true);
   const classes = useStyles();
   const { setIsDark } = useTheme();
   return (
     <Container>
-      <Button
-        color="secondary"
-        variant="contained"
-        onClick={() => setIsDark(prevIsDark => !prevIsDark)}
-      >
-        Change Theme
-      </Button>
       <MyDialog />
       <Grid container spacing={1} justify="center">
         <CardUI />
@@ -70,36 +76,10 @@ const Home = () => {
         <CardUI />
         <CardUI />
       </Grid>
-      <Grid justify="center" container spacing={1}>
-        <Grid item elevation={3} xs={10} md={4} lg={3} open={open}>
-          <Paper style={{ position: "relative" }}>
-            <IconButton
-              style={{ position: "absolute", right: "10px" }}
-              onClick={() => setOpen(false)}
-            >
-              <CloseIcon />
-            </IconButton>
-            <h1>Title</h1>
-            <p>Filler content</p>
-            <Button className={classes.root}>GREEN</Button>
-          </Paper>
+      <Grid container justify="center">
+        <Grid item>
+          <ModalStyled />
         </Grid>
-        <Grid item elevation={3} xs={10}>
-          <Paper>
-            <h1>Title</h1>
-            <p>Filler content</p>
-          </Paper>
-        </Grid>
-        <Grid item elevation={3} lg={3} md={4} xs={10}>
-          <Paper>
-            <h1>Title</h1>
-            <p>Filler content</p>
-          </Paper>
-        </Grid>
-        <DialogContainer />
-        <MenuUI />
-        <StyledButton />
-        <MainGrid />
       </Grid>
     </Container>
   );
@@ -116,7 +96,17 @@ const styledTheme = {
   },
 };
 
+const useInput = txt => {
+  const [value, setValue] = useState(txt);
+  return [
+    { value, onChange: e => setValue(e.target.value) },
+    () => setValue(txt),
+  ];
+};
+
 const Material = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const { pathname } = useLocation() || { pathname: "/" };
   const { isDark } = useTheme();
   const theme = React.useMemo(
     () =>
@@ -130,6 +120,25 @@ const Material = () => {
       }),
     [isDark]
   );
+  const [login, reset] = useInput("");
+  const handleLogin = () => {
+    if (+login.value === 1995) {
+      setLoggedIn(true);
+      return;
+    }
+    alert("WRONG PASSWORD");
+    reset();
+  };
+  if (!loggedIn) {
+    return (
+      <StyledThemeProvider theme={{ background: "skyblue", color: "white" }}>
+        <Global />
+        <h1>Please login first</h1>
+        <TextField {...login} />
+        <Button onClick={handleLogin}>Login</Button>
+      </StyledThemeProvider>
+    );
+  }
   return (
     <StyledThemeProvider theme={isDark ? styledTheme.dark : styledTheme.light}>
       <ThemeProvider theme={theme}>
@@ -149,7 +158,10 @@ const Material = () => {
             <Grid container spacing={10}>
               <Grid item xs={12}>
                 <Paper>
-                  <h1>404 Page: Nothing was found</h1>
+                  <h1>
+                    404 Page: Nothing was found: Please check if ` is the
+                    {pathname} correct pathname or not
+                  </h1>
                 </Paper>
               </Grid>
             </Grid>

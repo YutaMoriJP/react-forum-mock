@@ -16,7 +16,6 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import Typography from "@material-ui/core/Typography";
 import { useTheme } from "../ContextProvider/ThemeProvider";
-import Switch from "@material-ui/core/Switch";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -103,7 +102,7 @@ const Navbar = () => {
           <IconButton>
             <Menu onClick={handleOpen} isDark={isDark} />
           </IconButton>
-          <Typography variant="h5">Home {JSON.stringify(isDark)}</Typography>
+          <Typography variant="h5">Home</Typography>
           <CheckboxStyled
             color="primary"
             checkedIcon={<Sun />}
