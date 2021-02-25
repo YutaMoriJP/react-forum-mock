@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StyledButton from "./button/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -129,6 +129,7 @@ const Material = () => {
     alert("WRONG PASSWORD");
     reset();
   };
+  useEffect(() => (document.title = "Material UI Powered App"), []);
   if (!loggedIn) {
     return (
       <StyledThemeProvider theme={{ background: "skyblue", color: "white" }}>

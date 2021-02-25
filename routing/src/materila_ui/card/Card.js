@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 const CardStyled = styled(Card)``;
 const CardUI = () => {
   return (
-    <Grid item xs={8} sm={5} md={4} lg={3}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       <CardStyled elevation={20}>
         <CardActionArea>
           <CardMedia
